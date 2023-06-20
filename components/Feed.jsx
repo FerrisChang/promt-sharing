@@ -9,6 +9,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
         <PromptCard 
           key={post._id}
           post={post}
+          handleTagClick={handleTagClick}
         />
       ))}
     </div>
@@ -31,7 +32,7 @@ const Feed = () => {
       setPosts(data);
     } 
     fetchPosts();
-  }, [])
+  }, []);
 
   return (
     <section className='feed'>
