@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import PromptCard from './PromptCard'
-import tailwindConfig from '@tailwind.config'
 
 const PromptCardList = ({ data, handleTagClick }) => {
   console.log(data)
@@ -18,32 +17,48 @@ const PromptCardList = ({ data, handleTagClick }) => {
   )
 }
 
-const Feed = () => {
-  const [searchText, setSearchText] = useState('');
-  const [posts, setPosts] = useState([]);
-  const [searchResult, setSearchResult] = useState([])
+const Feed = () => { 
+  const [allPosts, setAllPosts] = useState([]);
   
-  const handleSearchChange = (e) => {
-
-  }
-
+  const [searchText, setSearchText] = useState('');
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchResult, setSearchResult] = useState([]);
+ 
   useEffect(() => {
     const fetchPosts = async() => {
       const response = await fetch('/api/prompt');
       const data = await response.json();
       
-      setPosts(data);
+      setAllPosts(data);
     } 
     fetchPosts();
   }, []);
+  
 
   const searchPrompts = (search) => {
     const regex = new RegExp(search, 'i');
-    return allPosts.filter()
+    return allPosts.filter((item) => {
+      regex.test(item.creator.username) || regex.test(item.tag) || regex.test(item.prompt)
+    });
+  };
+
+
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = searchPrompts(e.target.value);
+        setSearchResult(searchResult);
+      }, 500)
+    );
   }
 
 
-  const handleTagClick = (tag) = => {
+
+
+  const handleTagClick = (tag) => {
     setSearchText(tag);
 
     const searchResult = searchPrompts(tag);
@@ -62,11 +77,16 @@ const Feed = () => {
         />
       </form>
 
-
-      <PromptCardList 
-        data={posts}
-        handleTagClick={() => {}}
-      />
+{searchText ? (
+  <PromptCardList 
+  data={searchResult}
+  handleTagClick={handleTagClick}
+/>
+) : (
+  <PromptCardList
+  data={allPosts} 
+  handleTagClick={handleTagClick} /> 
+)}
     </section>
   )
 }
