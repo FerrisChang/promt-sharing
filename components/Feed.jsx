@@ -1,8 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import PromptCard from './PromptCard'
+import tailwindConfig from '@tailwind.config'
 
 const PromptCardList = ({ data, handleTagClick }) => {
+  console.log(data)
   return (
     <div className='mt-16 prompt_layout'>
       {data.map((post) => (
@@ -19,6 +21,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('');
   const [posts, setPosts] = useState([]);
+  const [searchResult, setSearchResult] = useState([])
   
   const handleSearchChange = (e) => {
 
@@ -34,6 +37,18 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
+  const searchPrompts = (search) => {
+    const regex = new RegExp(search, 'i');
+    return allPosts.filter()
+  }
+
+
+  const handleTagClick = (tag) = => {
+    setSearchText(tag);
+
+    const searchResult = searchPrompts(tag);
+    setSearchResult(searchResult);
+  }
   return (
     <section className='feed'>
       <form className='relative w-full flex-center'>
@@ -46,6 +61,7 @@ const Feed = () => {
           className='search_input peer' 
         />
       </form>
+
 
       <PromptCardList 
         data={posts}

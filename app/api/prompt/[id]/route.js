@@ -33,7 +33,7 @@ export const PATCH = async (request, { params }) => {
   } catch (error) {
     return new Response("Failed to fetch all prompts", { status: 500 })
   }
-}
+};
 
 export const DELETE = async (request, { params }) => {
   try {
@@ -45,4 +45,4 @@ export const DELETE = async (request, { params }) => {
   } catch (error) {
     return new Response("Failed to delete prompt", { status: 500 })
   }
-}
+};
