@@ -1,25 +1,15 @@
-import mongoose from "mongoose";
+import { PrismaClient } from '@prisma/client';
 
-let isConnected = false; //track the connection
+const prisma = new PrismaClient();
 
 export const connectToDB = async () => {
-  mongoose.set('strictQuery', true);
-
-  if(isConnected) {
-    console.log('MongoDB is already connected');
-    return;
-  }
-
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "share_prompt",
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-
-    isConnected = true;
-    console.log('MongoDB connected')
+    await prisma.$connect();
+    console.log('Database connected successfully');
   } catch (error) {
-    console.log(error);
+    console.error('Database connection error:', error);
+    throw error;
   }
-}
+};
+
+export default prisma;

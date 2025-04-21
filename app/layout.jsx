@@ -1,25 +1,21 @@
-import React from 'react'
-import '@styles/globals.css'
-import Nav from '@components/Nav'
-import Provider from '@components/Provider'
+'use client'
 
-export const metadata = {
-  title: "PromptMe",
-  description: 'Discover & Share AI Prompts'
-}
-const RootLayout = ({children}) => {
+import React from 'react'
+import '../styles/globals.css'
+import Nav from '../components/Nav'
+
+const RootLayout = ({ children }) => {
   return (
     <html lang='en'>
       <body>
-        <Provider>
-          <div className='main'>
-            <div className='gradient' />
-          </div>
-          <main className='app'>
-            <Nav />
-            {children}
-          </main>
-        </Provider>
+        <div className='main'>
+          <div className='gradient' />
+        </div>
+
+        <main className='app'>
+          <Nav />
+          {children}
+        </main>
       </body>
     </html>
   )

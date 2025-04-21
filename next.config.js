@@ -11,8 +11,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   experimental: {
-    optimizeCss: true,
-    serverActions: true,
+    optimizeCss: false,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

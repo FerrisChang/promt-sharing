@@ -109,6 +109,23 @@
   @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
 }
 
+/* Autocomplete Dropdown Styles */
+.autocomplete-dropdown {
+  @apply absolute top-12 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-60 overflow-y-auto z-50;
+}
+
+.autocomplete-item {
+  @apply p-2 hover:bg-gray-100 cursor-pointer text-sm font-satoshi text-gray-700;
+}
+
+.autocomplete-item:hover {
+  @apply bg-gray-50;
+}
+
+.autocomplete-item:last-child {
+  @apply border-b-0;
+}
+
 .copy_btn {
   @apply w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center cursor-pointer;
 }
@@ -167,4 +184,39 @@
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+  .head_text {
+    @apply text-3xl;
+  }
+  
+  .desc {
+    @apply text-sm;
+  }
+  
+  .prompt_card {
+    @apply p-4;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .head_text {
+    @apply text-4xl;
+  }
+  
+  .desc {
+    @apply text-base;
+  }
+}
+
+@media (min-width: 1025px) {
+  .head_text {
+    @apply text-5xl;
+  }
+  
+  .desc {
+    @apply text-lg;
+  }
 }
